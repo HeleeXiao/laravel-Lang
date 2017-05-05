@@ -21,6 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name("home");
 Route::post('/home/image-upload', 'HomeController@imageUpload')->name("img_up");
 Route::post('/platform', 'HomeController@setPlatform')->name("set-platform");
+
 Route::post('/search', function(){
     return back()->with('message','Sorry , 暂没有全局搜索功能！')->with("status",201);
 });

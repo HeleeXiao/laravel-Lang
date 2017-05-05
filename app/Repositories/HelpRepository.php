@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 
 use App\Models\Permission;
+use Carbon\Carbon;
 
 class HelpRepository{
 
@@ -35,5 +36,42 @@ class HelpRepository{
         }
         return $parentPermission;
     }
+
+    /**
+     * @name        getVarName
+     * @DateTime    ${DATE}
+     * @param       int
+     * @return      string
+     * @version     1.0
+     * @author      < 18681032630@163.com >
+     */
+    public static function getVarName($type = 1)
+    {
+        $head   = ['Web_',"Admin_"];
+        $chars  = $head[$type].self::getChars(6).'_'. ( Carbon::now()->timestamp - 1493000000);
+        return $chars;
+
+    }
+
+    /**
+     * @name        getChars
+     * @DateTime    ${DATE}
+     * @param       int
+     * @return      string
+     * @version     1.0
+     * @author      < 18681032630@163.com >
+     */
+    public static function getChars($len = 4)
+    {
+        $chars = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O',
+            'P','Q','R','S','T','U','V','W','X','Y','Z'];
+        $string = '';
+        for($i = 0; $i < $len; $i++)
+        {
+            $string .= $chars[ mt_rand(0, COUNT($chars) - 1) ];
+        }
+        return $string;
+    }
+
 
 }

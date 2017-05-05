@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\HelpRepository;
+use App\User;
 use Illuminate\Http\Request;
 
 class LangController extends Controller
@@ -13,7 +15,7 @@ class LangController extends Controller
      */
     public function index()
     {
-        //
+        dd(HelpRepository::getVarName());
     }
 
     /**
@@ -23,7 +25,12 @@ class LangController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        return view('lang.add',[
+            'users' => $users,
+            'layui' => true,
+            "var_name" => HelpRepository::getVarName()
+        ]);
     }
 
     /**
@@ -81,4 +88,23 @@ class LangController extends Controller
     {
         //
     }
+
+    /**
+     * @name        getCreateLangOfTableTbodyTr
+     * @DateTime    ${DATE}
+     * @param       \Illuminate\Http\Request.
+     * @return      \Illuminate\Support\Facades\View
+     * @version     1.0
+     * @author      < 18681032630@163.com >
+     */
+    public function getCreateLangOfTableTbodyTr()
+    {
+
+        $html = response()->view("lang.CreateLangOfTableTbodyTr",[
+            "var_name" => HelpRepository::getVarName()
+        ])->content();
+        return response()->json(['html'=>$html]);
+
+    }
+
 }

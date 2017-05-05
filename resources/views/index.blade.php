@@ -82,7 +82,7 @@
                     LTS Manager
                 </div>
                 <div class="links">
-                    <a target="_blank" href="https://github.com/HeleeXiao">HeleeXiao Github</a>
+                    {{--<a target="_blank" href="https://github.com/HeleeXiao">HeleeXiao Github</a>--}}
                 </div>
             </div>
         </div>
