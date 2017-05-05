@@ -70,14 +70,14 @@
                     <!-- Stats User Widget -->
                     <a href="{{ url('/word?person='.$user->id) }}" class="widget">
                         <div class="widget-content border-bottom text-dark">
-                            <span class="pull-right text-muted">本周</span>
-                            责任者
+                            <span class="pull-right text-muted">This week</span>
+                            Person liable
                         </div>
                         <div class="widget-content border-bottom text-center themed-background-muted">
-                            <img src="img/placeholders/avatars/avatar13@2x.jpg" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar-2x">
+                            <img src="{{ ("img/user/".$user->head) }}" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar-2x">
                             <h2 class="widget-heading h3 text-dark">{{ $user->name }}</h2>
                         <span class="text-muted">
-                            <strong>Logo Designer</strong>, Sweden
+                            <strong>{{ $user->id != 4?"Engineer":"Interpreter" }}</strong>
                         </span>
                         </div>
                         <div class="widget-content widget-content-full-top-bottom">
