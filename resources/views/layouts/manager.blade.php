@@ -395,7 +395,15 @@
                         <!-- END Danger Alert -->
                     </div>
                 @endif
-
+                <div class="col-sm-6 col-lg-12 " id="message">
+                    <!-- Warning Alert -->
+                    <div class="alert alert-warning alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><strong>Warning</strong></h4>
+                        <p> 开发阶段，翻译相关的事先别在这上面操作！！！ </p>
+                    </div>
+                    <!-- END Warning Alert -->
+                </div>
                 <div class="block full">
                 @section("content")
 
