@@ -28,6 +28,7 @@ Route::post('/search', function(){
 
 Route::get('/word/init',"WordController@initKeyWords");
 Route::get('/word/solve/{id}',"WordController@solve");
+Route::post('/lang/getCreateLangOfTableTbodyTr',"LangController@getCreateLangOfTableTbodyTr")->name('get-create-lang-tr');
 Route::resource("word","WordController");
 Route::resource("lang","LangController");
 Route::resource("permissions","PermissionController");

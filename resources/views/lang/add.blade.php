@@ -148,7 +148,10 @@
                                 @include('lang.CreateLangOfTableTbodyTr')
                             </tbody>
                         </table>
-                        <a class="btnbtn btn-sm btn-success" style="float: right"><i class="fa fa-plus-square"></i></a>
+                        <a class="btnbtn btn-sm btn-success" style="float: right"
+                           onclick="layer.load(2);getCreateLangOfTableTbodyTr();">
+                            <i class="fa fa-plus-square"></i>
+                        </a>
                         @if($errors->has("var"))
                             <span id="example-validation-email-error" class="help-block animation-slideDown">
                                 {{ $errors->first("var") }}!
@@ -196,4 +199,21 @@
                 </div>
             <!-- END Form Buttons -->
         </form>
+@stop
+
+@section('js')
+
+    <script>
+        function getCreateLangOfTableTbodyTr()
+        {
+            $.post('{{ route("get-create-lang-tr") }}',
+                    {_token:'{{ csrf_token() }}'},
+                    function(result){
+                        $('#var-tbody').append(result.html);
+                        layer.closeAll();
+                    }
+            );
+        }
+    </script>
+
 @stop
