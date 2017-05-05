@@ -289,6 +289,7 @@
                     <!-- Search Form -->
                     <li>
                         <form action="{{ url("search") }}" method="post" class="navbar-form-custom">
+                            {{ csrf_field() }}
                             <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
                         </form>
                     </li>
