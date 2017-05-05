@@ -22,6 +22,7 @@ class CreateLangTable extends Migration
                 $table->text('description');
                 $table->tinyInteger('person')->comment("责任人")->default('1');
                 $table->tinyInteger('sponsor')->comment("发起人")->default('4');
+                $table->string('comment')->comment("修改说明");
                 $table->integer('status')->comment("状态：0正常，1待处理，2已处理，3弃用")->nullable()->default(0);
                 $table->integer('type')->comment("类型：1后台，0前台")->nullable()->default(1);
                 $table->timestamps();
