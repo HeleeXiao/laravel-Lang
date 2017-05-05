@@ -74,7 +74,7 @@
                             Person liable
                         </div>
                         <div class="widget-content border-bottom text-center themed-background-muted">
-                            <img src="{{ ("img/user/".$user->head) }}" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar-2x">
+                            <img src="{{ url("img/user/".$user->head) }}" alt="avatar" class="img-circle img-thumbnail img-thumbnail-avatar-2x">
                             <h2 class="widget-heading h3 text-dark">{{ $user->name }}</h2>
                         <span class="text-muted">
                             <strong>{{ $user->id != 4?"Engineer":"Interpreter" }}</strong>
