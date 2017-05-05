@@ -33,21 +33,27 @@ class WordController extends Controller
     public function index(Request $request)
     {
         $keys = Keyword::where("type",$request->session()->get("platform"));
-        if($request->has('keywords'))
+        if($request->has('keywords') && $request->input('keywords') != "")
         {
-            if($request->input('keywords') != "")
-            {
-                $keys = $keys->Where('var_name','like',"%".e($request->input('keywords'))."%");
-                $keys = $keys->orWhere('chinese','like',"%".e($request->input('keywords'))."%");
-                $keys = $keys->orWhere('japanese','like',"%".e($request->input('keywords'))."%");
-            }
+            $keys = $keys->Where(function($query) use($request) {
+                $query->Where('var_name','like',"%".e($request->input('keywords'))."%")
+                ->orWhere('chinese','like',"%".e($request->input('keywords'))."%")
+                ->orWhere('japanese','like',"%".e($request->input('keywords'))."%")
+                ->orWhere('id','=',e($request->input('keywords')));
+            });
         }
         if($request->has('type')){
             $keys = $keys->where('type',intval($request->input('type')));
         }
+        if($request->has('person')){
+            $keys = $keys->where('person',intval($request->input('person')));
+        }
+        if($request->has('sponsor')){
+            $keys = $keys->where('sponsor',intval($request->input('sponsor')));
+        }
         $limit = $request->has('l') && in_array($request->input('l'),[5,10,20,200]) ?
-            $request->input('l')  : 10;
-        $keys = $keys->orderBy('updated_at','desc')->paginate($limit);
+            $request->input('l')  : 10 ;
+        $keys = $keys->orderBy("order",'asc')->orderBy('updated_at','desc')->paginate($limit);
         return view('keyword.list',['list' => $keys,'request'=>$request,'layui'=>true]);
     }
 

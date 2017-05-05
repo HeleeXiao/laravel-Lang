@@ -26,6 +26,7 @@ class CreateKeywordTable extends Migration
                 $table->string('comment')->comment("修改说明")->nullable();
                 $table->integer('status')->comment("状态：0正常，1待处理，2已处理，3弃用")->nullable()->default(0);
                 $table->integer('type')->comment("类型：1后台，0前台")->nullable()->default(1);
+                $table->integer('order')->comment("排序：ASC")->nullable()->default(5);
                 $table->timestamps();
             });
         }

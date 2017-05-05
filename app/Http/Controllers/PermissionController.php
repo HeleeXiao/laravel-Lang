@@ -31,10 +31,12 @@ class PermissionController extends Controller
         {
             if($request->input('keywords') != "")
             {
-                $permissions = $permissions->Where('name_zh','like',"%".e($request->input('keywords'))."%");
-                $permissions = $permissions->orWhere('name_jp','like',"%".e($request->input('keywords'))."%");
-                $permissions = $permissions->orWhere('display_name','like',"%".e($request->input('keywords'))."%");
-                $permissions = $permissions->orWhere('description','like',"%".e($request->input('keywords'))."%");
+                $permissions = $permissions->Where(function($query) use($request) {
+                    $query->Where('name_zh','like',"%".e($request->input('keywords'))."%")
+                        ->orWhere('name_jp','like',"%".e($request->input('keywords'))."%")
+                        ->orWhere('display_name','like',"%".e($request->input('keywords'))."%")
+                        ->orWhere('description','like',"%".e($request->input('keywords'))."%");
+                });
             }
         }
         if($request->has('type')){

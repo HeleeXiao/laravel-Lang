@@ -30,6 +30,8 @@ class UpdateWordListener
     {
         $event->word ;
         if($event->word->status == 1) {
+            $event->word->order = 1;
+            $event->word->save();
             $user = User::find($event->word->person);
             \Mail::send('emails.notice', ['user' => $user ], function ($email) use ($user) {
                 $email->to($user->email)->subject('待办翻译事项');

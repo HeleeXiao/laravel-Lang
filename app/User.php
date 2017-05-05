@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Keyword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
@@ -27,4 +28,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function word()
+    {
+        return $this->hasMany(Keyword::class,'person','id')->where("type",\Session::get("platform"));
+    }
+
 }

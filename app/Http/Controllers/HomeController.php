@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Keyword;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,7 +27,24 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('manager.index');
+        /**
+         * 获取本周一的时间
+         */
+        $week = date('w');
+        $weeks = date('Y-m-d 00:00:00',strtotime( '+'. 1-$week .' days' ));
+        /**
+         * 统计数据
+         */
+        $statistics = [];
+        $statistics['count'] = Keyword::where("type",\Session::get("platform"))->count();
+        $statistics['updated'] = Keyword::where("type",\Session::get("platform"))->where("updated_at",'>',$weeks)->where("status",2)->count();
+        $statistics['created'] = Keyword::where("type",\Session::get("platform"))->where("created_at",'>',$weeks)->count();
+        $statistics['pending'] = Keyword::where("type",\Session::get("platform"))->where("status",1)->count();
+        $users = User::all();
+        return view('manager.index',[
+            'statistics'=>$statistics,
+            'users'     =>$users,
+        ]);
     }
 
     /**

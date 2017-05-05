@@ -86,10 +86,14 @@
                             <td>{{ $info->chinese }}</td>
                             <td>{{ $info->japanese }}</td>
                             <td align="center">
-                                <span class="{{ $label_class[$info->person] }}">{{ $info->personUser->name }}</span>
+                                <a href="{{ $request->url().($request->getQueryString()? '?'.$request->getQueryString().'&person='.$info->person:'?person='.$info->person ) }}">
+                                    <span class="{{ $label_class[$info->person] }}">{{ $info->personUser->name }}</span>
+                                </a>
                             </td>
                             <td align="center">
-                                <span class="{{ $label_class[$info->sponsor] }}">{{ $info->sponsorUser->name }}</span>
+                                <a href="{{ $request->url().($request->getQueryString()? '?'.$request->getQueryString().'&sponsor='.$info->sponsor:'?sponsor='.$info->sponsor ) }}">
+                                    <span class="{{ $label_class[$info->sponsor] }}">{{ $info->sponsorUser->name }}</span>
+                                </a>
                             </td>
                             <td align="center">
                                 <span class="{{ $label_class_status[$info->status] }}">{{ config("app.status")[$info->status] }}</span>

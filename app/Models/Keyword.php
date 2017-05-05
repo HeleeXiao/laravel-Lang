@@ -15,7 +15,9 @@ class Keyword extends Model
     /**
      * @var array
      */
-    protected $fillable = [ 'lang_id','var_name','chinese','japanese','person','status',"type","description"];
+    protected $fillable = [
+        'lang_id','var_name','chinese','japanese','person',
+        'status',"type","description",'order'   ];
 
     /**
      * @name        personUser
