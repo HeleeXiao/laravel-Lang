@@ -44,4 +44,9 @@ class Keyword extends Model
         return $this->hasOne(User::class,'id','sponsor');
     }
 
+    public function lang()
+    {
+        return $this->hasOne(Lang::class,'id','lang_id');
+    }
+
 }

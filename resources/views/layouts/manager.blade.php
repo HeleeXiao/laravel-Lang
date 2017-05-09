@@ -217,11 +217,7 @@
                                     @if(count($per['children']))
                                         <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
                                     @endif
-                                    @if($per['name'] == "Permission")
-                                        <i class="fa fa-unlock-alt fa-fw"></i>
-                                    @else
-                                        <i class="fa fa-user fa-fw"></i>
-                                    @endif
+                                        <i class="fa fa-th-list"></i>
 
 
                                     <span class="sidebar-nav-mini-hide">{{ $per[$name] }}</span>

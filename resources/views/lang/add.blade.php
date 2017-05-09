@@ -39,9 +39,9 @@
                                 <i class="gi gi-asterisk"></i>
                             </span>
                         </div>
-                        @if($errors->has("var_name"))
+                        @if($errors->has("title"))
                             <span id="example-validation-username-error" class="help-block animation-slideDown">
-                                {{ $errors->first("var_name") }}！
+                                {{ $errors->first("title") }}！
                             </span>
                         @endif
                     </div>
@@ -50,10 +50,10 @@
                     <label class="col-md-4 control-label" for="example-validation-username">页面URL <span class="text-danger">*</span></label>
                     <div class="col-md-6">
                         <div class="input-group">
-                            <input type="text" id="example-validation-username" name="title"
+                            <input type="text" id="example-validation-username" name="url"
                                    class="form-control ui-wizard-content" placeholder="请输入页面URL"
                                    required="" aria-required="true" aria-describedby="example-validation-username-error"
-                                   aria-invalid="true" value="{{ old('url') }}"
+                                   aria-invalid="true" value="{{ old('url') ?: url("/")."@" }}"
                                     >
                             <span class="input-group-addon">
                                 <i class="gi gi-asterisk"></i>
@@ -113,9 +113,9 @@
                     <div class="col-md-6">
                         <div class="input-group">
                             <select id="val-skill" name="status" class="form-control">
-                                <option value="">请选择</option>
+                                <option value="" {{ !old('status') ? "selected" : "" }}>请选择</option>
                                 <option value="0">正常</option>
-                                <option value="1" {{ old('status') == 1 ? "selected" : ( !old('status') ? "selected" : "" ) }}>待处理</option>
+                                <option value="1" {{ old('status') == 1 ? "selected" : "" }}>待处理</option>
                                 <option value="2" {{ old('status') == 2 ? "selected" : "" }}>已处理</option>
                                 <option value="3" {{ old('status') == 3 ? "selected" : "" }}>废弃</option>
                             </select>
@@ -164,6 +164,11 @@
                     <label class="col-md-4 control-label" for="example-validation-email">
                         详细说明 :
                     </label>
+                    @if($errors->has("description"))
+                        <span id="example-validation-email-error" class="help-block animation-slideDown">
+                                {{ $errors->first("description") }}!
+                            </span>
+                    @endif
                     <div class="col-md-9"   style="margin: 0 0 0 15%">
                             <textarea id="demo"  name="description" style="display: none;">
                                 {{old("description")}}
@@ -183,11 +188,7 @@
                                 });
                             </script>
                         {{--</div>--}}
-                        @if($errors->has("description"))
-                            <span id="example-validation-email-error" class="help-block animation-slideDown">
-                                {{ $errors->first("description") }}!
-                            </span>
-                        @endif
+
                     </div>
                 </div>
             <!-- Form Buttons -->
