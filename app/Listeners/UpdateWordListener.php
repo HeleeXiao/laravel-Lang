@@ -28,7 +28,6 @@ class UpdateWordListener
      */
     public function handle(UpdateWordNameEvent $event)
     {
-        $event->word ;
         if($event->word->status == 1) {
             $event->word->order = 1;
             $event->word->save();

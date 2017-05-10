@@ -186,7 +186,7 @@ class WordController extends Controller
         }
         if(! $flag )
         {
-            return back()->with("message","没有需要修改的数据！")->with("status",203);
+            return back()->with("message","没有需要修改的数据！")->with("status",203)->withInput();
         }
         $commentString = '更新了:'.implode("、",$comment)."。";
         $updateArray['comment'] = $commentString;

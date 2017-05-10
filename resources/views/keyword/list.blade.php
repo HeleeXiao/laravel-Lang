@@ -135,34 +135,30 @@
                                             <i class="gi gi-ok_2"></i>
                                         </a>
                                     @endif
-                                {{--@permission('lang.edit')--}}
                                     <a href="{{ url("word/$info->id/edit") }}" data-toggle="tooltip" title=""
                                        class="btn btn-effect-ripple btn-xs btn-danger" style="overflow: hidden; position: relative;"
                                        data-original-title="编辑" >
                                             <i class="fa fa-pencil"></i>
                                     </a>
-                                {{--@endpermission--}}
-                                {{--@permission('lang.destroy')--}}
-                                    <form style="display:inline-block" action="javascript:;" method="post" id="destroy-{{ $info->id }}">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="_method" value="delete">
-                                    <a href="javascript:void(0)" data-toggle="tooltip" title=""
-                                       class="btn btn-effect-ripple btn-xs btn-primary" style="overflow: hidden; position: relative;"
-                                       data-original-title="删除"
-                                       onclick="layer.confirm('{{ trans('messages.entrust_delete_alert') }}',{
-                                               btn:['No', 'Yes'],
-                                               title:'警告',
-                                               icon:0
-                                               },function(index, layero){
-                                                    layer.closeAll()
-                                               }
-                                               ,function(index, layero){
-                                                    $('#destroy-{{ $info->id }}').submit()
-                                               }); return false;">
-                                            <i class="fa fa-times" ></i>
-                                    </a>
-                                </form>
-                                {{--@endpermission--}}
+                                    {{--<form style="display:inline-block" action="javascript:;" method="post" id="destroy-{{ $info->id }}">--}}
+                                    {{--{{ csrf_field() }}--}}
+                                    {{--<input type="hidden" name="_method" value="delete">--}}
+                                    {{--<a href="javascript:void(0)" data-toggle="tooltip" title=""--}}
+                                       {{--class="btn btn-effect-ripple btn-xs btn-primary" style="overflow: hidden; position: relative;"--}}
+                                       {{--data-original-title="删除"--}}
+                                       {{--onclick="layer.confirm('{{ trans('messages.entrust_delete_alert') }}',{--}}
+                                               {{--btn:['No', 'Yes'],--}}
+                                               {{--title:'警告',--}}
+                                               {{--icon:0--}}
+                                               {{--},function(index, layero){--}}
+                                                    {{--layer.closeAll()--}}
+                                               {{--}--}}
+                                               {{--,function(index, layero){--}}
+                                                    {{--$('#destroy-{{ $info->id }}').submit()--}}
+                                               {{--}); return false;">--}}
+                                            {{--<i class="fa fa-times" ></i>--}}
+                                    {{--</a>--}}
+                                {{--</form>--}}
                             </td>
                         </tr>
                     @endforeach

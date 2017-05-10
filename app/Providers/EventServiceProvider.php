@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\UpdateWordNameEvent' => [
             'App\Listeners\UpdateWordListener',
         ],
+        'App\Events\UpdateLangEvent' => [
+            'App\Listeners\UpdateLangListener',
+        ],
     ];
 
     /**

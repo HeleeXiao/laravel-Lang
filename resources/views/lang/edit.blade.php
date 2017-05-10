@@ -1,10 +1,11 @@
 @extends("layouts.manager")
 
-@section("title","新增词汇需求 - ".config('app.name'))
+@section("title","编辑词汇需求 - ".config('app.name'))
 @section("content")
-    <form id="validation-wizard" action="{{ url('lang') }}" method="post" class="form-horizontal form-bordered ui-formwizard" novalidate="novalidate">
+    <form id="validation-wizard" action="{{ url('lang/'.$id) }}" method="post" class="form-horizontal form-bordered ui-formwizard" novalidate="novalidate">
             <!-- First Step -->
             {{ csrf_field() }}
+            {{ method_field("patch") }}
             <div id="validation-first" class="step ui-formwizard-content" style="display: block;">
                 <!-- Step Info -->
                 <div class="form-group">
@@ -14,7 +15,7 @@
                                 <a href="javascript:void(0)" class="text-muted">
                                     {{--<i class="fa fa-user"></i>--}}
                                     <i class="fa fa-info-circle"></i>
-                                    <strong>新增词汇需求</strong>
+                                    <strong>编辑词汇需求</strong>
                                 </a>
                             </li>
                             {{--<li class="disabled">--}}
@@ -33,7 +34,7 @@
                             <input type="text" id="example-validation-username" name="title"
                                    class="form-control ui-wizard-content" placeholder="请输入需求标题"
                                    required="" aria-required="true" aria-describedby="example-validation-username-error"
-                                   aria-invalid="true" value="{{ old('title') }}"
+                                   aria-invalid="true" value="{{ $lang->title }}"
                             >
                             <span class="input-group-addon">
                                 <i class="gi gi-asterisk"></i>
@@ -48,13 +49,12 @@
                 </div>
                 <div class="form-group @if($errors->has("url")) has-error @endif">
                     <label class="col-md-4 control-label" for="example-validation-username">页面URL <span class="text-danger">*</span></label>
-
                     <div class="col-md-6">
                         <div class="input-group">
                             <input type="text" id="example-validation-username" name="url"
-                                   class="form-control ui-wizard-content" placeholder="请输入需求页面路由"
+                                   class="form-control ui-wizard-content" placeholder="请输入页面URL"
                                    required="" aria-required="true" aria-describedby="example-validation-username-error"
-                                   aria-invalid="true" value="{{ old('url') ?: "http://".config("app.web_host")."@" }}"
+                                   aria-invalid="true" value="{{ $lang->url }}"
                                     >
                             <span class="input-group-addon">
                                 <i class="gi gi-asterisk"></i>
@@ -66,9 +66,8 @@
                             </span>
                         @endif
                     </div>
-
-
                 </div>
+
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="example-validation-confirm-password">
                         责任人
@@ -76,9 +75,11 @@
                     </label>
                     <div class="col-md-6">
                         <div class="input-group">
-                            <select id="val-skill" name="person" class="form-control">
+                            <select id="val-skill" name="person" class="form-control" >
                                 @foreach( $users as $user )
-                                    <option value="{{ $user->id }}" @if(old("person") == $user->id) selected  @endif>{{ $user->name }}</option>
+                                    <option value="{{ $user->id }}"
+                                            {{ old("person") ? (old("person") == $user->id ? "selected" : "" ) : ($lang->person == $user->id ? "selected" : "" )  }}
+                                            >{{ $user->name }}</option>
                                 @endforeach
                             </select>
                             <span class="input-group-addon">
@@ -94,11 +95,11 @@
                     </label>
                     <div class="col-md-6">
                         <div class="input-group">
-                            <select id="val-skill" name="sponsor" class="form-control">
+                            <select id="val-skill" name="sponsor" class="form-control" >
                                 @foreach( $users as $user )
-                                    <option value="{{ $user->id }}" @if($user->id == Auth::id()) selected  @endif>
-                                        {{ $user->name }}
-                                    </option>
+                                    <option value="{{ $user->id }}"
+                                            {{ old("sponsor") ? (old("sponsor") == $user->id ? "selected" : "" ) : ($lang->sponsor == $user->id ? "selected" : "" )  }}
+                                            >{{ $user->name }}</option>
                                 @endforeach
                             </select>
                             <span class="input-group-addon">
@@ -114,12 +115,11 @@
                     </label>
                     <div class="col-md-6">
                         <div class="input-group">
-                            <select id="val-skill" name="status" class="form-control">
-                                <option value="" {{ !old('status') ? "selected" : "" }}>请选择</option>
-                                <option value="0">正常</option>
-                                <option value="1" {{ old('status') == 1 ? "selected" : "" }}>待处理</option>
-                                <option value="2" {{ old('status') == 2 ? "selected" : "" }}>已处理</option>
-                                <option value="3" {{ old('status') == 3 ? "selected" : "" }}>废弃</option>
+                            <select id="val-skill" name="status" class="form-control" >
+                                <option value="0" {{ $lang->status == 0 ? "selected" : "" }}>正常</option>
+                                <option value="1" {{ $lang->status == 1 ? "selected" : "" }}>待处理</option>
+                                <option value="2" {{ $lang->status == 2 ? "selected" : "" }}>已处理</option>
+                                <option value="3" {{ $lang->status == 3 ? "selected" : "" }}>废弃</option>
                             </select>
                             <span class="input-group-addon">
                                 <i class="gi gi-asterisk"></i>
@@ -147,18 +147,40 @@
                             </tr>
                             </thead>
                             <tbody id="var-tbody">
-                                @include('lang.CreateLangOfTableTbodyTr')
+                                @foreach($lang->keyWords as $word)
+                                    <tr class="active">
+                                        <td>
+                                            <input type="hidden" name="word[id][]" value="{{ $word->id }}">
+                                            <input type="text" name="word[var_name][]"
+                                                   class="form-control ui-wizard-content" placeholder=""
+                                                   required="" aria-required="true" aria-describedby="example-validation-username-error"
+                                                   aria-invalid="true" value="{{ $word->var_name }}" readonly
+                                                    >
+                                        </td>
+                                        <td>
+                                            <input type="text" name="word[chinese][]"
+                                                   class="form-control ui-wizard-content" placeholder="请输入中文词汇"
+                                                   required="" aria-required="true" aria-describedby="example-validation-username-error"
+                                                   aria-invalid="true" value="{{ $word->chinese }}"
+                                                    >
+                                        </td>
+                                        <td>
+                                            <input type="text" name="word[japanese][]"
+                                                   class="form-control ui-wizard-content" placeholder="请输入日文词汇"
+                                                   required="" aria-required="true" aria-describedby="example-validation-username-error"
+                                                   aria-invalid="true" value="{{ $word->japanese }}"
+                                                    >
+                                        </td>
+
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                         <a class="btnbtn btn-sm btn-success" style="float: right"
                            onclick="layer.load(2);getCreateLangOfTableTbodyTr();">
                             <i class="fa fa-plus-square"></i>
                         </a>
-                        @if($errors->has("var"))
-                            <span id="example-validation-email-error" class="help-block animation-slideDown">
-                                {{ $errors->first("var") }}!
-                            </span>
-                        @endif
+
                     </div>
                 </div>
             <!-- END First Step -->
@@ -169,11 +191,11 @@
                     @if($errors->has("description"))
                         <span id="example-validation-email-error" class="help-block animation-slideDown">
                                 {{ $errors->first("description") }}!
-                            </span>
+                        </span>
                     @endif
                     <div class="col-md-9"   style="margin: 0 0 0 15%">
                             <textarea id="demo"  name="description" style="display: none;">
-                                {{old("description")}}
+                                {!! $lang->description !!}
                             </textarea>
                             <script>
                                 layui.use('layedit', function(){
@@ -197,7 +219,7 @@
                 <div class="form-group form-actions">
                     <div class="col-md-8 col-md-offset-4">
                         {{--<input type="reset" class="btn btn-sm btn-warning ui-wizard-content ui-formwizard-button" id="back3" value="Back" disabled="disabled">--}}
-                        <input type="submit" class="btn btn-sm btn-primary ui-wizard-content ui-formwizard-button" id="next3" value="添加">
+                        <input type="submit" class="btn btn-sm btn-primary ui-wizard-content ui-formwizard-button" id="next3" value="提交">
                     </div>
                 </div>
             <!-- END Form Buttons -->

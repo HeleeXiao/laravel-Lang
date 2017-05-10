@@ -3,6 +3,7 @@
 return [
     'name_zh'=>'name_zh',
     'name_jp'=>'name_jp',
+    "web_host" => "test02.c8l.jp",
     "person" =>[
         "Powerglq","HeleeXiao","Samuel","Elia Q"
     ],
