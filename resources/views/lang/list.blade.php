@@ -91,7 +91,7 @@
                                 </a>
                             </td>
                             <td align="center">
-                                <a href="{{ $request->url().($request->getQueryString()? '?'.$request->getQueryString().'&sponsor='.$info->sponsor:'?sponsor='.$info->sponsor ) }}">
+                                <a target="_blank" href="{{ $request->url().($request->getQueryString()? '?'.$request->getQueryString().'&sponsor='.$info->sponsor:'?sponsor='.$info->sponsor ) }}">
                                     <span class="{{ $label_class[$info->sponsor] }}">{{ $info->sponsorUser->name }}</span>
                                 </a>
                             </td>
