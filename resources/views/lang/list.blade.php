@@ -83,7 +83,7 @@
                             <td class="text-center sorting_1" id="update-id-{{ $info->id }}">{{ $info->id }}</td>
 
                             <td><strong>{{ $info->title }}</strong></td>
-                            <td><a href="{{ $info->url }}">{{ $info->url }}</a></td>
+                            <td><a  target="_blank" href="{{ $info->url }}">{{ $info->url }}</a></td>
                             <td>{{ count($info->keyWords) }}</td>
                             <td align="center">
                                 <a href="{{ $request->url().($request->getQueryString()? '?'.$request->getQueryString().'&person='.$info->person:'?person='.$info->person ) }}">
@@ -91,7 +91,7 @@
                                 </a>
                             </td>
                             <td align="center">
-                                <a target="_blank" href="{{ $request->url().($request->getQueryString()? '?'.$request->getQueryString().'&sponsor='.$info->sponsor:'?sponsor='.$info->sponsor ) }}">
+                                <a href="{{ $request->url().($request->getQueryString()? '?'.$request->getQueryString().'&sponsor='.$info->sponsor:'?sponsor='.$info->sponsor ) }}">
                                     <span class="{{ $label_class[$info->sponsor] }}">{{ $info->sponsorUser->name }}</span>
                                 </a>
                             </td>
