@@ -135,7 +135,10 @@ class LangController extends Controller
         foreach ($words as $value) {
             $id = Keyword::create($value);
         }
-
+        /*
+         * 触发事件
+         */
+        \Event::fire(new UpdateLangEvent(Lang::find($langId)));
         \DB::commit();
         return redirect("lang")->with("message",'添加词汇需求成功！')->with("status",200);
     }

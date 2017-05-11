@@ -34,7 +34,7 @@ class UpdateLangListener
             $event->lang->save();
             $user = User::find($event->lang->person);
             \Mail::send('emails.notice', ['user' => $user ], function ($email) use ($user) {
-                $email->to($user->email)->subject('待办翻译事项');
+                $email->to($user->email)->subject('待办翻译需求');
             });
             \Log::info(" Send Email to: $user->email 「 有未处理的翻译需求事件 」 at ".Carbon::now()->format("Y-m-d H:i"));
         }

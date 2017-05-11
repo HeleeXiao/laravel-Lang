@@ -77,7 +77,7 @@ class HomeController extends Controller
             'code' => 0,
             'msg' => 'success',
             "data"=>[
-                "src"=> asset("storage/".$path),
+                "src"=> asset("/storage/".$path),
                 "title" => ""
             ]
         ];

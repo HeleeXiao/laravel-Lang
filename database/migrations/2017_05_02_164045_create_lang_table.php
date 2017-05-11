@@ -18,7 +18,7 @@ class CreateLangTable extends Migration
                 $table->increments('id');
                 $table->integer('file_id')->comment("关联的附件")->nullable();
                 $table->string('title');
-                $table->string('url')->comment("url");
+                $table->string('url')->comment("url")->nullable();
                 $table->text('description')->nullable();
                 $table->tinyInteger('person')->comment("责任人")->default('1');
                 $table->tinyInteger('sponsor')->comment("发起人")->default('4');
