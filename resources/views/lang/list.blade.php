@@ -129,11 +129,11 @@
                                         <i class="gi gi-eye_open"></i>
                                     </a>
                                     @if($info->status == 1)
-                                        <a href="{{ url("lang/solve/$info->id") }}" data-toggle="tooltip" title=""
-                                           class="btn btn-effect-ripple btn-xs btn-success" style="overflow: hidden; position: relative;"
-                                           data-original-title="解决" >
-                                            <i class="gi gi-ok_2"></i>
-                                        </a>
+                                        {{--<a href="{{ url("lang/solve/$info->id") }}" data-toggle="tooltip" title=""--}}
+                                           {{--class="btn btn-effect-ripple btn-xs btn-success" style="overflow: hidden; position: relative;"--}}
+                                           {{--data-original-title="解决" >--}}
+                                            {{--<i class="gi gi-ok_2"></i>--}}
+                                        {{--</a>--}}
                                     @endif
                                     <a href="{{ url("lang/$info->id/edit") }}" data-toggle="tooltip" title=""
                                        class="btn btn-effect-ripple btn-xs btn-danger" style="overflow: hidden; position: relative;"

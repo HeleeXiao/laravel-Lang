@@ -1,6 +1,16 @@
 @extends("layouts.manager")
 
 @section("title","词汇需求 - ".config('app.name'))
+@section("style")
+    <style>
+        .description img{
+            width: 100%;
+        }
+        .description{
+            text-align: center;
+        }
+    </style>
+@stop
 @section("content")
     <form id="validation-wizard" action="#" method="" class="form-horizontal form-bordered ui-formwizard" novalidate="novalidate">
             <!-- First Step -->
@@ -183,7 +193,7 @@
                                 {{ $errors->first("description") }}!
                             </span>
                     @endif
-                    <div class="col-md-9"   style="margin: 0 0 0 15%;border: 1px solid black;min-height: 300px;padding-top: 10px">
+                    <div class="col-md-9 description"   style="margin: 0 0 0 15%;border: 1px solid black;min-height: 300px;padding-top: 10px">
                             {!! $lang->description !!}
                     </div>
                 </div>
