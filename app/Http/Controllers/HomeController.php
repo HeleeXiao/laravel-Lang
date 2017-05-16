@@ -40,9 +40,7 @@ class HomeController extends Controller
         $statistics['updated'] = Keyword::where("type",\Session::get("platform"))->where("updated_at",'>',$weeks)->where("status",2)->count();
         $statistics['created'] = Keyword::where("type",\Session::get("platform"))->where("created_at",'>',$weeks)->count();
         $statistics['pending'] = Keyword::where("type",\Session::get("platform"))->where("status",1)->count();
-        $users = User::whereIn('email',[
-            'powerglq@163.com','xc@jtrips.com','wsm@jtrips.com','qyy@jtrips.com'
-        ])->get();
+        $users = User::whereIn('type',[0,1])->get();
         return view('manager.index',[
             'statistics'=>$statistics,
             'users'     =>$users,
