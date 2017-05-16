@@ -1496,7 +1496,9 @@ return[
     "ADMIN_XC_fund_add_borrower_add"=>"添加一个企业",
     "ADMIN_XC_fund_add_fund_content"=>"基金详细介绍",
     "ADMIN_XC_fund_add_js_money_error"=>"请输入正确的金额",
-
+    'borrower_to_two' => "请至少分配两个借款企业",
+    'detail_content_required' => "必须填写基金详情（PC）",
+    'description_phone_required' => "必须填写基金详情(PHONE)",
 
     //admin/fund/approvel.blade.php
 
@@ -2908,12 +2910,14 @@ return[
     'balance_index_7' => "操作",
     'balance_index_8' => "下载",
     'balance_index_9' => "状态",
-    'balance_index_10' => "已读",
-    'balance_index_11' => "未读",
-    'balance_detail_1' => "序号",
-    'balance_detail_2' => "用户账号",
-    'balance_detail_3' => "JNB账户",
-    'balance_detail_4' => "账户余额",
-    'balance_detail_5' => "冻结余额",
-    'balance_detail_6' => "残高",
+    'balance_index_10' => "未读",
+    'balance_index_11' => "已读",
+    'balance_detail_1' => "清单明细表",
+    'balance_detail_2' => "序号",
+    'balance_detail_3' => "用户账号",
+    'balance_detail_4' => "JNB账户",
+    'balance_detail_5' => "账户余额",
+    'balance_detail_6' => "冻结余额",
+    'balance_detail_7' => "残高",
+
 ];

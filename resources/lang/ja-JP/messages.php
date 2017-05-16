@@ -1496,7 +1496,9 @@ return[
     "ADMIN_XC_fund_add_borrower_add"=>"融資先追加",
     "ADMIN_XC_fund_add_fund_content"=>"ファンド詳細",
     "ADMIN_XC_fund_add_js_money_error"=>"正確の金額を入力してください",
-
+    'borrower_to_two'  => "请至少分配两个借款企业",
+    'detail_content_required' => "必须填写基金详情（PC）",
+    'description_phone_required' => "必须填写基金详情(PHONE)",
 
     //admin/fund/approvel.blade.php
 
@@ -1786,7 +1788,7 @@ return[
     "back_fund_index_forSaleSuccess"=>"公開しました。",
     "back_fund_index_forSaleFalse"=>"公開処理にエラーが発生しました。",
     "repayment_index_examine"=>"審査",
-    "back_fund_time_unit_1"=>"天",
+    "back_fund_time_unit_1"=>"日",
     "back_fund_time_unit_2"=>"月",
     "back_fund_time_unit_3"=>"年",
 
@@ -1959,7 +1961,7 @@ return[
     "back_customer_detail_confirm_stat"=>"下記のいずれかが該当しますか",
     "identify_basic_yes"=>"はい(該当する)",
     "identify_basic_no"=>"いいえ(該当しない) ",
-    "back_id_bank_info"=>"銀行カード情報",
+    "back_id_bank_info"=>"銀行口座情報",
     "back_customer_bank_name"=>"銀行名称",
     "back_customer_bank_code"=>"銀行コード",
     "back_customer_branch_name"=>"支店名",
@@ -2347,7 +2349,7 @@ return[
 
     "back_v_repaymentborrower_003"=>"返済計画/履歴",
     "excel_all_page"=>"全てエクスポート",
-    "back_v_repaymentborrower_011"=>"全ての未償還をエクスポートする",
+    "back_v_repaymentborrower_011"=>"全ての未返済をエクスポートする",
     "excel_this_page"=>"当ページエクスポート",
     "back_v_repaymentborrower_015"=>"ファンド名",
     "back_timef_start"=>"購入日時（開始）",
@@ -2372,7 +2374,7 @@ return[
     "back_v_repaymentborrower_022"=>"返済元金",
     "back_v_repaymentborrower_023_1"=>"審査状態",
     "back_v_repaymentborrower_024"=>"銀行口座取引履歴",
-    "back_repayment_list_time"=>"償還日付",
+    "back_repayment_list_time"=>"返済日付",
     "back_v_enterprise_019"=>"操作",
     "back_fund_day"=>"日",
     "identify_basic_mouth"=>"月",
@@ -2889,7 +2891,7 @@ return[
     'ADMIN_LOGIN' => 'ログイン',
     'PASSWORD_MIN_LENGTH' => '半角英数字6桁以上で入力してください',
     'ADMIN_NOT_USER' => 'このアカウントは存在しません',
-    'remember' => '次回から自動でログイン？',
+    'remember' => '次回から自動でログイン',
     /*************************************************
     |             Entrust Permissions End            |
      *************************************************/
@@ -2906,12 +2908,14 @@ return[
     'balance_index_7' => "操作",
     'balance_index_8' => "下载",
     'balance_index_9' => "状态",
-    'balance_index_10' => "已读",
-    'balance_index_11' => "未读",
-    'balance_detail_1' => "序号",
-    'balance_detail_2' => "用户账号",
-    'balance_detail_3' => "JNB账户",
-    'balance_detail_4' => "账户余额",
-    'balance_detail_5' => "冻结余额",
-    'balance_detail_6' => "残高",
+    'balance_index_10' => "未读",
+    'balance_index_11' => "已读",
+    'balance_detail_1' => "清单明细表",
+    'balance_detail_2' => "序号",
+    'balance_detail_3' => "用户账号",
+    'balance_detail_4' => "JNB账户",
+    'balance_detail_5' => "账户余额",
+    'balance_detail_6' => "冻结余额",
+    'balance_detail_7' => "残高",
+
 ];
