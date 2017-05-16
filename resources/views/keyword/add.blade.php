@@ -33,7 +33,7 @@
                             <input type="text" id="example-validation-username" name="var_name"
                                    class="form-control ui-wizard-content" placeholder="请输入权限名称"
                                    required="" aria-required="true" aria-describedby="example-validation-username-error"
-                                   aria-invalid="true" value="{{ old('var_name') }}"
+                                   aria-invalid="true" value="{{ old('var_name') ?: App\Repositories\HelpRepository::getVarName( \Session::get("platform") ) }}"
                             >
                             <span class="input-group-addon">
                                 <i class="gi gi-asterisk"></i>
