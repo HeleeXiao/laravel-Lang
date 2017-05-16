@@ -21,7 +21,7 @@ class LangController extends Controller
         'sponsor'   => '发起人',
         'description'   => '详细说明',
         'title'     => '需求标题',
-        'url'       => '需求路由',
+        'url'       => '路由',
     ];
     public function __construct()
     {
@@ -268,7 +268,7 @@ class LangController extends Controller
                 }
                 if ($DbWord->japanese != $value['japanese'] || $DbWord->chinese != $value['chinese']) {
                     $wordUpdateData[] = array_merge($value, [
-                        'lang_id' => $id, 'status' => 1, 'type' => \Session::get('platform'), 'comment' => $comment . "字段！"
+                        'lang_id' => $id, 'url' => e($request->url), 'status' => 1, 'type' => \Session::get('platform'), 'comment' => $comment . "字段！"
                     ]);
                 }
             }
