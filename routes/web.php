@@ -33,6 +33,8 @@ Route::post('/search', function(){
 Route::get('/word/init',"WordController@initKeyWords");
 Route::get('/word/solve/{id}',"WordController@solve");
 Route::post('/lang/getCreateLangOfTableTbodyTr',"LangController@getCreateLangOfTableTbodyTr")->name('get-create-lang-tr');
+Route::get('/word/get/config/file/chinese',"WordController@savePhpFileForChinese")->name('get-config-file-chinese');
+Route::get('/word/get/config/file/japanese',"WordController@savePhpFileForJapanese")->name('get-config-file-japanese');
 Route::resource("word","WordController");
 Route::resource("lang","LangController");
 Route::resource("permissions","PermissionController");

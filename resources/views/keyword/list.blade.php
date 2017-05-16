@@ -15,7 +15,15 @@
 
         <div class="block-title">
             <h2>词汇列表</h2>
-            <i class="fi fi-php"></i>
+            <button class="btn btn-sm btn-primary ui-wizard-content ui-formwizard-button"
+                    onclick="
+                        window.location.href='{{route("get-config-file-chinese")}}';
+                        window.open('{{route("get-config-file-japanese")}}');
+                    "
+                    >
+                下载PHP配置文件
+            </button>
+
         </div>
         <div class="table-responsive">
             <div id="example-datatable_wrapper" class="dataTables_wrapper form-inline no-footer">

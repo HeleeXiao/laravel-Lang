@@ -274,4 +274,81 @@ class WordController extends Controller
         \DB::commit();
         dd("OK");
     }
+
+    /**
+     * @name        savePhpFileForChinese
+     * @Date        ${DATE}
+     * @param       \Illuminate\Http\Request.
+     * @return      \
+     * @author      < xc@jtrips.com >
+     */
+    public function savePhpFileForChinese()
+    {
+        try {
+            if(\Session::get("platform") == 1){
+                $pt = "ADMIN";
+            }else{
+                $pt = "WEB";
+            }
+            $config_ch = fopen($pt."_chinese_config_messages.php", "w");
+            $words = Keyword::where("type", \Session::get("platform"))
+                ->select(['var_name', 'japanese', 'chinese', 'url'])->get();
+            $phpHeader = "<?php" . PHP_EOL . '     return ' . PHP_EOL . '      [' . PHP_EOL;
+            $phpFooter = PHP_EOL . '   ]; ';
+            fwrite($config_ch, $phpHeader);
+            foreach ($words as $value) {
+                fwrite($config_ch, "        // $value->url" . PHP_EOL);
+                fwrite($config_ch, "        \"" . $value->var_name . "\" => \"" . $value->chinese . "\", " . PHP_EOL);
+            }
+            fwrite($config_ch, $phpFooter);
+            fclose($config_ch);
+
+            header("Content-type:text/html;charset=utf-8");
+            header('Content-type: application/php');
+            header('Content-Disposition: attachment; filename="'.$pt.'_chinese_config_messages.php"');
+            readfile($pt."_chinese_config_messages.php");
+            exit();
+        }catch (\Exception $e){
+
+        }
+    }
+
+    /**
+     * @name        savePhpFileForJapanese
+     * @Date        ${DATE}
+     * @param       \Illuminate\Http\Request.
+     * @return      \
+     * @author      < xc@jtrips.com >
+     */
+    public function savePhpFileForJapanese()
+    {
+        try {
+            if(\Session::get("platform") == 1){
+                $pt = "ADMIN";
+            }else{
+                $pt = "WEB";
+            }
+            $config_jp = fopen($pt."_japanese_config_messages.php", "w");
+            $words = Keyword::where("type", \Session::get("platform"))
+                ->select(['var_name', 'japanese', 'chinese', 'url'])->get();
+            $phpHeader = "<?php" . PHP_EOL . '     return ' . PHP_EOL . '      [' . PHP_EOL;
+            $phpFooter = PHP_EOL . '   ]; ';
+            fwrite($config_jp, $phpHeader);
+            foreach ($words as $value) {
+                fwrite($config_jp, "        // $value->url" . PHP_EOL);
+                fwrite($config_jp, "        \"" . $value->var_name . "\" => \"" . $value->japanese . "\", " . PHP_EOL);
+            }
+            fwrite($config_jp, $phpFooter);
+            fclose($config_jp);
+
+            header("Content-type:text/html;charset=utf-8");
+            header('Content-type: application/php');
+            header('Content-Disposition: attachment; filename="'.$pt.'_japanese_config_messages.php"');
+            readfile($pt."_japanese_config_messages.php");
+            exit();
+        }catch (\Exception $e){
+
+        }
+    }
+
 }

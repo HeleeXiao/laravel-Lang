@@ -15,7 +15,6 @@
 
         <div class="block-title">
             <h2>词汇需求列表</h2>
-            <i class="fi fi-php"></i>
         </div>
         <div class="table-responsive">
             <div id="example-datatable_wrapper" class="dataTables_wrapper form-inline no-footer">
