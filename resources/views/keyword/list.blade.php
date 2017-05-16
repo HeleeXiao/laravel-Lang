@@ -68,6 +68,7 @@
                         <th >变量名</th>
                         <th >中文</th>
                         <th >日文</th>
+                        <th >URL</th>
                         <th style="width: 8%" >责任人</th>
                         <th style="width: 8%" >发起人</th>
                         <th style="width: 6%" >状态</th>
@@ -85,6 +86,7 @@
                             <td><strong>{{ $info->var_name }}</strong></td>
                             <td>{{ $info->chinese }}</td>
                             <td>{{ $info->japanese }}</td>
+                            <td>{{ $info->url }}</td>
                             <td align="center">
                                 <a href="{{ $request->url().($request->getQueryString()? '?'.$request->getQueryString().'&person='.$info->person:'?person='.$info->person ) }}">
                                     <span class="{{ $label_class[$info->person] }}">{{ $info->personUser->name }}</span>

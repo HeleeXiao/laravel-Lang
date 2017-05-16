@@ -127,6 +127,7 @@ class LangController extends Controller
             $words[$key]['japanese'] = $request->word['japanese'][$key];
             $words[$key]['lang_id']  = $langId;
             $words[$key]['description'] = $request->description;
+            $words[$key]['url']         = e($request->url);
             $words[$key]['person']      = e($request->person);
             $words[$key]['sponsor']     = e($request->sponsor);
         }

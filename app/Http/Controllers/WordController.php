@@ -17,6 +17,7 @@ class WordController extends Controller
         'japanese'  => '日文词汇',
         'person'    => '责任人',
         'sponsor'   => '发起人',
+        'url'       => '路由',
         'description'   => '详细说明',
     ];
 
@@ -95,6 +96,7 @@ class WordController extends Controller
             'var_name'  => e( trim( $request->input('var_name') ) ),
             'japanese'  => e( trim( $request->input('japanese') ) ),
             'chinese'   => e( trim( $request->input('chinese') ) ),
+            'url'   => e( trim( $request->input('url') ) ),
             'description'   => e( trim( $request->input('description') ) ),
             'status'    => $request->status,
             'person'    => $request->person,

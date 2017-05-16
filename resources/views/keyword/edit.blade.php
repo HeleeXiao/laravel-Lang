@@ -94,6 +94,29 @@
                         @endif
                     </div>
                 </div>
+                <div class="form-group @if($errors->has("url")) has-error @endif">
+                    <label class="col-md-4 control-label" for="example-validation-username">页面URL <span class="text-danger">*</span></label>
+
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <input type="text" id="example-validation-username" name="url"
+                                   class="form-control ui-wizard-content" placeholder="请输入需求页面路由"
+                                   required="" aria-required="true" aria-describedby="example-validation-username-error"
+                                   aria-invalid="true" value="{{ old('url') ?: $word->url  }}"
+                                    >
+                            <span class="input-group-addon">
+                                <i class="gi gi-asterisk"></i>
+                            </span>
+                        </div>
+                        @if($errors->has("url"))
+                            <span id="example-validation-username-error" class="help-block animation-slideDown">
+                                {{ $errors->first("url") }}！
+                            </span>
+                        @endif
+                    </div>
+
+
+                </div>
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="example-validation-confirm-password">
                         责任人
