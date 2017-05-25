@@ -130,6 +130,7 @@ class LangController extends Controller
             $words[$key]['url']         = e($request->url);
             $words[$key]['person']      = e($request->person);
             $words[$key]['sponsor']     = e($request->sponsor);
+            $words[$key]['status']      = e($request->status);
         }
         if( ! count($words) )
         {
