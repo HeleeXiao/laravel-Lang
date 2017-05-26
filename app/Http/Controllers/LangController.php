@@ -235,6 +235,9 @@ class LangController extends Controller
                 $words[$key]['var_name'] = $var_name;
                 $words[$key]['chinese'] = $request->word['chinese'][$key];
                 $words[$key]['japanese'] = $request->word['japanese'][$key];
+                $words[$key]['person'] = e($request->person);
+                $words[$key]['sponsor'] = e($request->sponsor);
+                $words[$key]['status'] = e($request->status);
             }
             if (!count($words)) {
                 return back()->with("message", "至少需要完整填写一个词汇！")->with("status", 203)->withInput();
@@ -313,14 +316,14 @@ class LangController extends Controller
                         Keyword::where('id', $value['id'])->update($value);
                         $L = Keyword::find($value['id']);
                     }
-                    \Event::fire(new UpdateWordNameEvent($L));
+//                    \Event::fire(new UpdateWordNameEvent($L));
                 }
             }
             \DB::commit();
             return redirect("lang")->with("message",'修改成功！')->with("status",200);
         }catch (\Exception $e){
             \DB::rollBack();
-            return back()->with("message", "服务器在处理过程中遇到了错误，相信原有请查看系统日志！")
+            return back()->with("message", "服务器在处理过程中遇到了错误，详细原因请查看系统日志！")
                 ->with("status", 203)->withInput();
         }
     }
