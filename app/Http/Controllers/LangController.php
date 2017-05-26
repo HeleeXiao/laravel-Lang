@@ -223,6 +223,30 @@ class LangController extends Controller
                 }
             }
             /*
+             * words 基础信息修改
+             */
+            $wordUpdateDataForSPS = [];
+            if( array_has($updateData,'status') )
+            {
+                $wordUpdateDataForSPS['status'] = $lang['status'];
+            }
+            if( array_has($updateData,'person') )
+            {
+                $wordUpdateDataForSPS['person'] = $lang['person'];
+            }
+            if( array_has($updateData,'sponsor') )
+            {
+                $wordUpdateDataForSPS['sponsor'] = $lang['sponsor'];
+            }
+            if( array_has($updateData,'url') )
+            {
+                $wordUpdateDataForSPS['url'] = $lang['url'];
+            }
+            if(count( $wordUpdateDataForSPS ))
+            {
+                Keyword::where('lang_id',$id)->update($wordUpdateDataForSPS);
+            }
+            /*
              * 2.组装word数组 并向word表中保存数据
              */
             $words = [];
@@ -235,9 +259,6 @@ class LangController extends Controller
                 $words[$key]['var_name'] = $var_name;
                 $words[$key]['chinese'] = $request->word['chinese'][$key];
                 $words[$key]['japanese'] = $request->word['japanese'][$key];
-                $words[$key]['person'] = e($request->person);
-                $words[$key]['sponsor'] = e($request->sponsor);
-                $words[$key]['status'] = e($request->status);
             }
             if (!count($words)) {
                 return back()->with("message", "至少需要完整填写一个词汇！")->with("status", 203)->withInput();
@@ -279,7 +300,7 @@ class LangController extends Controller
             /*
              * 修改数据
              */
-            dd($wordUpdateData);
+
             if (!$updateData && !$wordUpdateData) {
                 return back()->with("message", "没有需要修改的数据！")->with("status", 201)->withInput();
             }
@@ -325,7 +346,7 @@ class LangController extends Controller
         }catch (\Exception $e){
             \DB::rollBack();
             \Log::info($e);
-            return back()->with("message", "服务器在处理过程中遇到了错误，详细原因请查看系统日志！")
+            return back()->with("message", "服务器在处理过程中遇到了错误(可能是数据修改成功，但邮件发送过于频繁)，详细原因请查看系统日志！")
                 ->with("status", 203)->withInput();
         }
     }
