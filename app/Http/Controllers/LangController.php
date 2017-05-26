@@ -279,6 +279,7 @@ class LangController extends Controller
             /*
              * 修改数据
              */
+            dd($wordUpdateData);
             if (!$updateData && !$wordUpdateData) {
                 return back()->with("message", "没有需要修改的数据！")->with("status", 201)->withInput();
             }
@@ -323,6 +324,7 @@ class LangController extends Controller
             return redirect("lang")->with("message",'修改成功！')->with("status",200);
         }catch (\Exception $e){
             \DB::rollBack();
+            \Log::info($e);
             return back()->with("message", "服务器在处理过程中遇到了错误，详细原因请查看系统日志！")
                 ->with("status", 203)->withInput();
         }

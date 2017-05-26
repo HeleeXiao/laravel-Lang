@@ -392,15 +392,15 @@
                         <!-- END Danger Alert -->
                     </div>
                 @endif
-                <div class="col-sm-6 col-lg-12 " id="message">
-                    <!-- Success Alert -->
-                    <div class="alert alert-success alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h4><strong></strong></h4>
-                        <p> 正式开始使用阶段 </p>
-                    </div>
-                    <!-- END Success Alert -->
-                </div>
+                {{--<div class="col-sm-6 col-lg-12 " id="message">--}}
+                    {{--<!-- Success Alert -->--}}
+                    {{--<div class="alert alert-success alert-dismissable">--}}
+                        {{--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>--}}
+                        {{--<h4><strong></strong></h4>--}}
+                        {{--<p> 正式开始使用阶段 </p>--}}
+                    {{--</div>--}}
+                    {{--<!-- END Success Alert -->--}}
+                {{--</div>--}}
                 <div class="block full">
                 @section("content")
 
