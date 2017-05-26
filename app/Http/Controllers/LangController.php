@@ -344,9 +344,13 @@ class LangController extends Controller
             \DB::commit();
             return redirect("lang")->with("message",'修改成功！')->with("status",200);
         }catch (\Exception $e){
+            if($e instanceof \Swift_TransportException){
+                \DB::commit();
+                return redirect("lang")->with("message",'邮件发送过于频繁导致发送失败，但数据已经修改成功')->with("status",201);
+            }
             \DB::rollBack();
             \Log::info($e);
-            return back()->with("message", "服务器在处理过程中遇到了错误(可能是数据修改成功，但邮件发送过于频繁)，详细原因请查看系统日志！")
+            return back()->with("message", "服务器在处理过程中遇到了错误，详细原因请查看系统日志！")
                 ->with("status", 203)->withInput();
         }
     }

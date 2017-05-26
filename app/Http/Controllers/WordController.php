@@ -92,20 +92,31 @@ class WordController extends Controller
             'status.required'   => "请务必选择词汇状态",
             'var_name.unique'   => "已经存在该变量名称，请修改",
         ]);
-        $id = Keyword::insertGetId([
-            'var_name'  => e( trim( $request->input('var_name') ) ),
-            'japanese'  => e( trim( $request->input('japanese') ) ),
-            'chinese'   => e( trim( $request->input('chinese') ) ),
-            'url'   => e( trim( $request->input('url') ) ),
-            'description'   => e( trim( $request->input('description') ) ),
-            'status'    => $request->status,
-            'person'    => $request->person,
-            'sponsor'   => $request->sponsor,
-            'type'      => $request->session()->get("platform"),
-        ]);
-        //触发事件  发送邮件
-        \Event::fire(new UpdateWordNameEvent(Keyword::find($id)));
-        return redirect("word")->with("message",'添加词汇成功！')->with("status",200);
+        try {
+            $id = Keyword::insertGetId([
+                'var_name' => e(trim($request->input('var_name'))),
+                'japanese' => e(trim($request->input('japanese'))),
+                'chinese' => e(trim($request->input('chinese'))),
+                'url' => e(trim($request->input('url'))),
+                'description' => e(trim($request->input('description'))),
+                'status' => $request->status,
+                'person' => $request->person,
+                'sponsor' => $request->sponsor,
+                'type' => $request->session()->get("platform"),
+            ]);
+            //触发事件  发送邮件
+            \Event::fire(new UpdateWordNameEvent(Keyword::find($id)));
+            return redirect("word")->with("message", '添加词汇成功！')->with("status", 200);
+        }catch (\Exception $e){
+            if($e instanceof \Swift_TransportException){
+                \DB::commit();
+                return redirect("word")->with("message",'邮件发送过于频繁导致发送失败，但数据已经修改成功')->with("status",201);
+            }
+            \DB::rollBack();
+            \Log::info($e);
+            return back()->with("message", "服务器在处理过程中遇到了错误，详细原因请查看系统日志！")
+                ->with("status", 203)->withInput();
+        }
     }
 
     /**
@@ -161,42 +172,49 @@ class WordController extends Controller
             'chinese.required'  => "请务必填写中文词汇",
             'status.required'   => "请务必选择词汇状态",
         ]);
-        $word = Keyword::find($id);
-        /*
-         * 是否修改标识 真亦真
-         */
-        $flag = false;
-        /*
-         * 需要修改的数据
-         */
-        $updateArray = [];
-        /*
-         * 修改说明
-         */
-        $comment = [];
-        foreach ($request->all() as $key => $value) {
-            if( in_array($key,['_token','_method']) )
-            {
-                continue;
+        try {
+            $word = Keyword::find($id);
+            /*
+             * 是否修改标识 真亦真
+             */
+            $flag = false;
+            /*
+             * 需要修改的数据
+             */
+            $updateArray = [];
+            /*
+             * 修改说明
+             */
+            $comment = [];
+            foreach ($request->all() as $key => $value) {
+                if (in_array($key, ['_token', '_method'])) {
+                    continue;
+                }
+                if ($word->$key != $value) {
+                    $flag = true;
+                    $updateArray[$key] = $value;
+                    $comment[] = $this->updateComment[$key];
+                }
             }
-            if( $word->$key != $value )
-            {
-                $flag = true;
-                $updateArray[$key] = $value;
-                $comment[] = $this->updateComment[$key] ;
+            if (!$flag) {
+                return back()->with("message", "没有需要修改的数据！")->with("status", 203)->withInput();
             }
-        }
-        if(! $flag )
-        {
-            return back()->with("message","没有需要修改的数据！")->with("status",203)->withInput();
-        }
-        $commentString = '更新了:'.implode("、",$comment)."。";
-        $updateArray['comment'] = $commentString;
-        if( Keyword::where("id",$id)->update($updateArray) )
-        {
-            //触发事件  发送邮件
-            \Event::fire(new UpdateWordNameEvent(Keyword::find($id)));
-            return redirect("word")->with("message",'修改成功！')->with("status",200);
+            $commentString = '更新了:' . implode("、", $comment) . "。";
+            $updateArray['comment'] = $commentString;
+            if (Keyword::where("id", $id)->update($updateArray)) {
+                //触发事件  发送邮件
+                \Event::fire(new UpdateWordNameEvent(Keyword::find($id)));
+                return redirect("word")->with("message", '修改成功！')->with("status", 200);
+            }
+        }catch (\Exception $e){
+            if($e instanceof \Swift_TransportException){
+                \DB::commit();
+                return redirect("word")->with("message",'邮件发送过于频繁导致发送失败，但数据已经修改成功')->with("status",201);
+            }
+            \DB::rollBack();
+            \Log::info($e);
+            return back()->with("message", "服务器在处理过程中遇到了错误，详细原因请查看系统日志！")
+                ->with("status", 203)->withInput();
         }
 
     }
