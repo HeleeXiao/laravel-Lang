@@ -54,7 +54,7 @@ class WordController extends Controller
         }
         $limit = $request->has('l') && in_array($request->input('l'),[5,10,20,200]) ?
             $request->input('l')  : 10 ;
-        $keys = $keys->orderBy("order",'asc')->orderBy('updated_at','desc')->paginate($limit);
+        $keys = $keys->orderBy("updated_at",'desc')->orderBy('created_at','desc')->paginate($limit);
         return view('keyword.list',['list' => $keys,'request'=>$request,'layui'=>true]);
     }
 

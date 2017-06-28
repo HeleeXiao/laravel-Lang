@@ -32,6 +32,9 @@
                     </label>
                     <div class="col-md-9"   style="margin: 0 0 0 15%;padding:5px;border-bottom:1px solid black;
                 border-top:1px solid black">
+                        <style>
+                            img{width:100%}
+                        </style>
                         {!! $word->description !!}
                     </div>
                 </div>
