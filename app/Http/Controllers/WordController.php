@@ -254,28 +254,28 @@ class WordController extends Controller
      * @author      < 18681032630@163.com >
      */
     public function initKeyWords () {
-        $chinese = \Lang::get('messages');      //后台数据
-        $HChinese = \Lang::get('messages_web'); //前台数据
+//        $chinese = \Lang::get('messages');      //后台数据
+        $HChinese = \Lang::get('messages'); //前台数据
         \App::setLocale('ja-JP');
-        $japanese = \Lang::get('messages');     //后台数据
-        $HJapanese = \Lang::get('messages_web');//前台数据
+//        $japanese = \Lang::get('messages');     //后台数据
+        $HJapanese = \Lang::get('messages');//前台数据
 //        dump($chinese);
 //        dump($japanese);
 //        dump($HChinese);
 //        dd($HJapanese);
         \DB::beginTransaction();
-        foreach ($chinese as $key => $value) {
-            $ins_id = Keyword::updateOrCreate([
-                "var_name" => $key ,
-                "japanese" => $japanese[$key],
-                "chinese"  => $value ,
-            ]);
-            if( ! $ins_id )
-            {
-                dd("error");
-                \DB::rollBack();
-            }
-        }
+//        foreach ($chinese as $key => $value) {
+//            $ins_id = Keyword::updateOrCreate([
+//                "var_name" => $key ,
+//                "japanese" => $japanese[$key],
+//                "chinese"  => $value ,
+//            ]);
+//            if( ! $ins_id )
+//            {
+//                dd("error");
+//                \DB::rollBack();
+//            }
+//        }
         foreach ($HChinese as $key => $value) {
             $ins_id = Keyword::updateOrCreate([
                 "var_name" => $key ,
