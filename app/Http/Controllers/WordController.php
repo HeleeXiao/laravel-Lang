@@ -303,14 +303,9 @@ class WordController extends Controller
     public function savePhpFileForChinese()
     {
         try {
-            if(\Session::get("platform") == 1){
-                $pt = "ADMIN";
-            }else{
-                $pt = "WEB";
-            }
+            $pt = "";
             $config_ch = fopen($pt."_chinese_config_messages.php", "w");
-            $words = Keyword::where("type", \Session::get("platform"))
-                ->select(['var_name', 'japanese', 'chinese', 'url'])->get();
+            $words = Keyword::select(['var_name', 'japanese', 'chinese', 'url'])->get();
             $phpHeader = "<?php" . PHP_EOL . '     return ' . PHP_EOL . '      [' . PHP_EOL;
             $phpFooter = PHP_EOL . '   ]; ';
             fwrite($config_ch, $phpHeader);
@@ -327,7 +322,7 @@ class WordController extends Controller
             readfile($pt."_chinese_config_messages.php");
             exit();
         }catch (\Exception $e){
-
+            throw $e;
         }
     }
 
@@ -341,14 +336,9 @@ class WordController extends Controller
     public function savePhpFileForJapanese()
     {
         try {
-            if(\Session::get("platform") == 1){
-                $pt = "ADMIN";
-            }else{
-                $pt = "WEB";
-            }
+            $pt = "";
             $config_jp = fopen($pt."_japanese_config_messages.php", "w");
-            $words = Keyword::where("type", \Session::get("platform"))
-                ->select(['var_name', 'japanese', 'chinese', 'url'])->get();
+            $words = Keyword::select(['var_name', 'japanese', 'chinese', 'url'])->get();
             $phpHeader = "<?php" . PHP_EOL . '     return ' . PHP_EOL . '      [' . PHP_EOL;
             $phpFooter = PHP_EOL . '   ]; ';
             fwrite($config_jp, $phpHeader);
@@ -365,7 +355,7 @@ class WordController extends Controller
             readfile($pt."_japanese_config_messages.php");
             exit();
         }catch (\Exception $e){
-
+            throw $e;
         }
     }
 

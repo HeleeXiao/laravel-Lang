@@ -100,7 +100,7 @@
                             <input type="text" id="example-validation-username" name="url"
                                    class="form-control ui-wizard-content" placeholder="请输入需求页面路由"
                                    required="" aria-required="true" aria-describedby="example-validation-username-error"
-                                   aria-invalid="true" value="{{ old('url') ?: "http://".config("app.web_host")."@" }}"
+                                   aria-invalid="true" value="{{ old('url') ?: "https://".config("app.web_host")."@" }}"
                                     >
                             <span class="input-group-addon">
                                 <i class="gi gi-asterisk"></i>
