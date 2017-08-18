@@ -18,7 +18,7 @@ class CreateKeywordTable extends Migration
                 $table->increments('id');
                 $table->string('var_name',255)->comment("变量名");
                 $table->integer('lang_id')->comment("table->lang : id")->nullable();
-                $table->string('url')->comment("url");
+                $table->string('url')->comment("url")->nullable();
                 $table->text('chinese')->comment("中文词汇");
                 $table->text('japanese')->comment("日文词汇");
                 $table->tinyInteger('person')->comment("责任人")->default('1');
