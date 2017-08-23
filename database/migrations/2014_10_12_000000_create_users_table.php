@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
                 $table->string('password');
                 $table->string('head')->nullable();
                 $table->integer('status')->comment("状态：0正常，1废弃,2冻结")->nullable()->default(0);
+                $table->integer('type')->comment("")->nullable()->default(0);
                 $table->rememberToken();
                 $table->timestamps();
             });
