@@ -310,11 +310,8 @@ class WordController extends Controller
     }
 
     /**
-     * @name        savePhpFileForJapanese
-     * @Date        ${DATE}
-     * @param       \Illuminate\Http\Request.
-     * @return      \
-     * @author      < xc@jtrips.com >
+     * @throws \Exception
+     * @auther <Helee>
      */
     public function savePhpFileForJapanese()
     {
