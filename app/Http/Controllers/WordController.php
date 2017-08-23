@@ -264,6 +264,7 @@ class WordController extends Controller
                 "japanese" => $HJapanese[$key],
                 "chinese"  => $value ,
                 "type"     => 0 ,
+                "url"      => "http://www.@@@??" ,
             ]);
             if( ! $ins_id )
             {
