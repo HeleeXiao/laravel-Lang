@@ -227,7 +227,8 @@ class WordController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Keyword::where('id',$id)->delete();
+        return back()->with("message","该词汇已经删除成功")->with("status",200);
     }
 
     /**

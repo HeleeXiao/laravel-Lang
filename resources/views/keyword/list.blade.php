@@ -150,7 +150,7 @@
                                        data-original-title="编辑" >
                                             <i class="fa fa-pencil"></i>
                                     </a>
-                                    <form style="display:inline-block" action="javascript:;" method="post" id="destroy-{{ $info->id }}">
+                                    <form style="display:inline-block" action="{{ url('word/'.$info->id) }}" method="post" id="destroy-{{ $info->id }}">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="_method" value="delete">
                                         <a href="javascript:void(0)" data-toggle="tooltip" title=""

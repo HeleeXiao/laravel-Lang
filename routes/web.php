@@ -40,3 +40,7 @@ Route::resource("lang","LangController");
 Route::resource("permissions","PermissionController");
 Route::resource("users","UserController");
 Route::resource("roles","RoleController");
+
+
+
+Route::any('/vue/login',"Api\\UserController@login");
