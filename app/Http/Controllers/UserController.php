@@ -30,7 +30,7 @@ class UserController extends Controller
             {
                 $users = $users->where('name','like',"%".e($request->input('keywords'))."%");
                 $users = $users->orWhere('email','like',"%".e($request->input('keywords'))."%");
-                $users = $users->orWhere('landing_ip','like',"%".e($request->input('keywords'))."%");
+//                $users = $users->orWhere('landing_ip','like',"%".e($request->input('keywords'))."%");
             }
         }
         $users = $users->paginate($request->input('l')?:10);
